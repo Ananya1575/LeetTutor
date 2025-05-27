@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetTutor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="logo">LeetTutor</a>
+        <div class="nav-buttons">
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode"></button>
+            <a href="signup.html" class="nav-button signup">Sign Up</a>
+            <a href="login.html" class="nav-button login">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-background">
+            <div class="animated-shape shape-1"></div>
+            <div class="animated-shape shape-2"></div>
+            <div class="animated-shape shape-3"></div>
+            <div class="animated-shape shape-4"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to LeetCode AI Helper</h1>
+            <p class="hero-subtitle">Master coding interviews with AI-powered guidance, personalized explanations, and step-by-step problem-solving strategies.</p>
+            <div class="hero-cta">
+                <a href="signup.html" class="hero-button primary">Get Started</a>
+                <a href="#introduction" class="hero-button secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>What is LeetCode AI Helper?</h2>
+            <p>LeetCode AI Helper is an interactive tool designed to assist you in preparing for coding interviews. It leverages AI to provide guided tutoring and problem-solving strategies for LeetCode problems.</p>
+            <p>Our unique value proposition lies in offering personalized, text-based explanations that focus on logic, intuition, and pseudocode, helping you understand the core concepts without overwhelming you with code snippets unless specifically requested.</p>
+        </section>
+        <section id="how-to-use">
+            <h2>How to Use the App</h2>
+            <p>Using LeetCode AI Helper is straightforward:</p>
+            <ol>
+                <li>Sign up or log in to your account.</li>
+                <li>Navigate to the chat interface.</li>
+                <li>Type your LeetCode question or problem in the text area.</li>
+                <li>Submit your query and receive a detailed, text-based response from the AI.</li>
+                <li>If you need code snippets or optimizations, explicitly request them in your query.</li>
+            </ol>
+            <p>Expect clear, step-by-step guidance that helps you build problem-solving skills and confidence for your interviews.</p>
+        </section>
+        <section id="ai-behavior">
+            <h2>About the AI</h2>
+            <p>The AI in LeetCode AI Helper is designed to mimic a simplified version of ChatGPT, tailored specifically for LeetCode problem-solving. By default, it provides:</p>
+            <ul>
+                <li>Logic and intuition behind the problem.</li>
+                <li>Pseudocode breakdowns.</li>
+                <li>Optimization strategies.</li>
+            </ul>
+            <p>It will not show code snippets unless you explicitly ask for them. If you request code, the AI will provide it, and you can also ask for optimized versions if needed.</p>
+        </section>
+        <section id="get-started">
+            <h2>Get Started</h2>
+            <p>Ready to enhance your LeetCode preparation? Sign up or log in to start your journey.</p>
+            <div class="buttons">
+                <a href="signup.html" class="button">Sign Up</a>
+                <a href="login.html" class="button">Login</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 LeetCode AI Helper. All rights reserved.</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

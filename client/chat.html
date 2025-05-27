@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - LeetCode AI Helper</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">LeetTutor</a>
+        <div class="nav-buttons">
+            <button class="dark-mode-toggle" id="dark-mode-toggle"></button>
+            <div class="profile">
+                <button class="button" id="profile-button">Profile</button>
+                <div class="dropdown" id="dropdown-menu">
+                    <a href="#" id="logout">Logout</a>
+                    <a href="#" id="delete-chats">Delete All Chats</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="chat-container">
+            <div class="chat-sidebar">
+                <button class="button" id="new-chat">New Chat</button>
+                <ul id="chat-history"></ul>
+            </div>
+            <div class="chat-main">
+                <div class="chat-messages" id="chat-messages"></div>
+                <form id="chat-form">
+                    <textarea id="user-input" name="user-input" placeholder="Enter your LeetCode question..." required></textarea>
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="js/chat.js"></script>
+</body>
+</html>
