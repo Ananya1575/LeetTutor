@@ -59,7 +59,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
         if (response.ok) {
             localStorage.setItem('token', data.token);
             alert('Login successful! Redirecting to chat...');
-            window.location.href = '/chat.html';
+            window.location.href = 'chat.html';
         } else {
             alert(data.message);
         }

@@ -64,7 +64,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
         if (response.ok) {
             localStorage.setItem('token', data.token);
             alert('Sign-up successful! Redirecting to chat...');
-            window.location.href = '/chat.html'; // We'll create this later
+            window.location.href = 'chat.html'; // We'll create this later
         } else {
             alert(data.message);
         }
