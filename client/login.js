@@ -46,7 +46,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     }
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`${window.location.origin}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,11 +59,12 @@ document.getElementById('login-form').addEventListener('submit', async function(
         if (response.ok) {
             localStorage.setItem('token', data.token);
             alert('Login successful! Redirecting to chat...');
-            window.location.href = 'chat.html'; // We'll create this later
+            window.location.href = '/chat.html';
         } else {
             alert(data.message);
         }
     } catch (error) {
-        alert('Error connecting to server');
+        console.error('Login error:', error);
+        alert('Failed to connect to server. Please try again later.');
     }
 });

@@ -51,7 +51,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
     }
 
     try {
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch(`${window.location.origin}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,12 +64,13 @@ document.getElementById('signup-form').addEventListener('submit', async function
         if (response.ok) {
             localStorage.setItem('token', data.token);
             alert('Sign-up successful! Redirecting to chat...');
-            window.location.href = 'chat.html'; // We'll create this later
+            window.location.href = '/chat.html'; // We'll create this later
         } else {
             alert(data.message);
         }
     } catch (error) {
-        alert('Error connecting to server');
+        console.error('Signup error:', error);
+        alert('Failed to connect to server. Please try again later.');
     }
 });
 
