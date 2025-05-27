@@ -98,7 +98,7 @@ const express = require('express');
                  // Generate title using OpenAI
                  try {
                      const titleResponse = await openai.chat.completions.create({
-                         model: 'gpt-3.5-turbo',
+                         model: 'gpt-4.1-nano',
                          messages: [
                              {
                                  role: 'system',
@@ -143,7 +143,7 @@ const express = require('express');
              console.log('Messages sent to OpenAI:', JSON.stringify(messages, null, 2));
              // Call OpenAI
              const response = await openai.chat.completions.create({
-                 model: 'gpt-3.5-turbo',
+                 model: 'gpt-4.1-nano',
                  messages,
                  max_tokens: 1000,
              });
