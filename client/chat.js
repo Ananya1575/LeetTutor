@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (confirm('Are you sure you want to delete all chats? This action cannot be undone.')) {
             try {
-                const response = await fetch('http://localhost:3000/chats', {
+                const response = await fetch(`${window.location.origin}/api/chats`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load chat history
     async function loadChatHistory() {
         try {
-            const response = await fetch('http://localhost:3000/chats', {
+            const response = await fetch(`${window.location.origin}/api/chats`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function deleteChat(chatId) {
         if (confirm('Are you sure you want to delete this chat?')) {
             try {
-                const response = await fetch(`http://localhost:3000/chats/${chatId}`, {
+                const response = await fetch(`${window.location.origin}/api/chats/${chatId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadChat(chatId) {
         currentChatId = chatId;
         try {
-            const response = await fetch(`http://localhost:3000/chats/${chatId}`, {
+            const response = await fetch(`${window.location.origin}/api/chats/${chatId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
