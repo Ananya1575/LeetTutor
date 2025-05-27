@@ -413,7 +413,7 @@ body.dark-mode .delete-chat-btn:hover {
     background: #991b1b;
 }
 
-/* Chat Form - Complete Fix */
+/* Chat Form - Updated Fix */
 #chat-form {
     padding: 15px 20px;
     background: white;
@@ -431,7 +431,7 @@ body.dark-mode #chat-form {
 }
 
 #user-input {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
     padding: 15px;
     border: 2px solid #e2e8f0;
     border-radius: 15px;
@@ -443,8 +443,7 @@ body.dark-mode #chat-form {
     transition: all 0.3s ease;
     background: #f8fafc;
     box-sizing: border-box;
-    min-width: 0;
-    max-width: none;
+    width: 100%;
 }
 
 body.dark-mode #user-input {
@@ -845,14 +844,12 @@ form p {
 
     #user-input {
         border-radius: 10px;
-        flex: none;
         width: 100%;
     }
 
     #chat-form .button {
         width: 100%;
         padding: 12px;
-        flex: none;
     }
 
     .message-bubble {
