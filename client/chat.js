@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (!token) {
         alert('Please log in to access the chat');
-        window.location.href = 'login.html';
+        window.location.href = '/login.html';
         return;
     }
 
@@ -31,21 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Configure marked
     marked.setOptions({
-        breaks: true, // Convert newlines to <br>
-        gfm: true,   // Enable GitHub Flavored Markdown
+        breaks: true,
+        gfm: true
     });
 
     // Dark mode functionality
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
         const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
-        console.log(`Dark mode ${isDarkMode ? 'enabled' : 'disabled'}`);
+        try {
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            console.log(`Dark mode ${isDarkMode ? 'enabled' : 'disabled'}`);
+        } catch (e) {
+            console.warn('localStorage not available:', e.message);
+        }
     }
 
     // Load dark mode preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
+    try {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    } catch (e) {
+        console.warn('localStorage not available:', e.message);
     }
 
     // Dark mode toggle event
@@ -70,9 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (confirm('Are you sure you want to logout?')) {
-            localStorage.removeItem('token');
-            window.location.href = 'login.html';
-            console.log('User logged out');
+            try {
+                localStorage.removeItem('token');
+                window.location.href = '/login.html';
+                console.log('User logged out');
+            } catch (e) {
+                console.warn('localStorage not available:', e.message);
+            }
         }
     });
 
@@ -84,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${window.location.origin}/api/chats`, {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
                 if (response.ok) {
                     chatHistory.innerHTML = '';
@@ -100,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Delete all chats failed:', data);
                 }
             } catch (error) {
-                alert('Error deleting chats');
-                console.error('Error deleting all chats:', error);
+                alert('Failed to delete chats. Please try again.');
+                console.error('Error deleting all chats:', error.message, error.stack);
             }
         }
     });
@@ -111,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`${window.location.origin}/api/chats`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
+                    'Authorization': `Bearer ${token}`
+                }
             });
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${await response.text()}`);
@@ -149,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             console.log('Chat history loaded:', chats.length, 'chats');
         } catch (error) {
-            alert('Error loading chat history');
-            console.error('Error loading chat history:', error);
+            alert('Failed to load chat history. Please try again.');
+            console.error('Error loading chat history:', error.message, error.stack);
         }
     }
 
@@ -161,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${window.location.origin}/api/chats/${chatId}`, {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
                 if (response.ok) {
                     if (currentChatId === chatId) {
@@ -178,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Delete chat failed:', data);
                 }
             } catch (error) {
-                alert('Error deleting chat');
-                console.error('Error deleting chat:', error);
+                alert('Failed to delete chat. Please try again.');
+                console.error('Error deleting chat:', error.message, error.stack);
             }
         }
     }
@@ -190,8 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`${window.location.origin}/api/chats/${chatId}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
+                    'Authorization': `Bearer ${token}`
+                }
             });
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${await response.text()}`);
@@ -206,8 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
             loadChatHistory();
             console.log(`Chat ${chatId} loaded`);
         } catch (error) {
-            alert('Error loading chat');
-            console.error('Error loading chat:', error);
+            alert('Failed to load chat. Please try again.');
+            console.error('Error loading chat:', error.message, error.stack);
         }
     }
 
@@ -218,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const div = document.createElement('div');
             div.className = `message ${msg.role}`;
             div.style.animationDelay = `${index * 0.1}s`;
-            // Parse markdown for AI messages, plain text for user messages
             const content = msg.role === 'ai' ? marked.parse(msg.content) : msg.content;
             div.innerHTML = `
                 <div class="message-bubble">${content}</div>
@@ -268,13 +279,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             console.log('Sending message with chatId:', currentChatId);
-            const response = await fetch('http://localhost:3000/chat', {
+            const response = await fetch(`${window.location.origin}/api/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ prompt, chatId: currentChatId }),
+                body: JSON.stringify({ prompt, chatId: currentChatId })
             });
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${await response.text()}`);
@@ -292,8 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
             loadChatHistory();
             console.log('AI response received:', data.response);
         } catch (error) {
-            alert('Error communicating with AI');
-            console.error('Error sending message:', error);
+            alert('Failed to communicate with AI. Please try again.');
+            console.error('Error sending message:', error.message, error.stack);
         }
     });
 

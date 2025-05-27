@@ -45,7 +45,7 @@ const express = require('express');
              });
              await user.save();
              const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-                 expiresIn: '1h',
+                 expiresIn: '1d',
              });
              console.log(`User signed up: ${email}`);
              res.status(201).json({ token });
@@ -68,7 +68,7 @@ const express = require('express');
                  return res.status(400).json({ message: 'Invalid email or password' });
              }
              const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-                 expiresIn: '1h',
+                 expiresIn: '1d',
              });
              console.log(`User logged in: ${email}`);
              res.json({ token });

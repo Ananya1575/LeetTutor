@@ -1,7 +1,7 @@
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     
-    // Save the user's preference (Note: localStorage not available in Claude artifacts)
+    // Save the user's preference
     const isDarkMode = document.body.classList.contains('dark-mode');
     try {
         if (isDarkMode) {
@@ -10,8 +10,7 @@ function toggleDarkMode() {
             localStorage?.setItem('darkMode', 'disabled');
         }
     } catch (e) {
-        // Fallback for environments without localStorage
-        console.log('localStorage not available');
+        console.warn('localStorage not available:', e.message);
     }
 }
 
@@ -23,9 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('dark-mode');
         }
     } catch (e) {
-        // Fallback for environments without localStorage
-        console.log('localStorage not available');
+        console.warn('localStorage not available:', e.message);
     }
+
+    // Add focus animations to inputs
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'translateX(5px)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'translateX(0)';
+        });
+    });
 });
 
 // Form validation and submission
@@ -54,9 +64,9 @@ document.getElementById('signup-form').addEventListener('submit', async function
         const response = await fetch(`${window.location.origin}/api/signup`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({ username, email, password })
         });
 
         const data = await response.json();
@@ -64,23 +74,12 @@ document.getElementById('signup-form').addEventListener('submit', async function
         if (response.ok) {
             localStorage.setItem('token', data.token);
             alert('Sign-up successful! Redirecting to chat...');
-            window.location.href = 'chat.html'; // We'll create this later
+            window.location.href = 'chat.html';
         } else {
-            alert(data.message);
+            alert(data.message || 'Sign-up failed. Please try again.');
         }
     } catch (error) {
-        console.error('Signup error:', error);
+        console.error('Signup error:', error.message, error.stack);
         alert('Failed to connect to server. Please try again later.');
     }
-});
-
-// Input animations
-document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'scale(1.02)';
-    });
-    
-    input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'scale(1)';
-    });
 });
