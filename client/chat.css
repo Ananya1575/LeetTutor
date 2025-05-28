@@ -113,7 +113,7 @@ body.dark-mode .dark-mode-toggle:hover {
 }
 
 .profile .button {
-    background:transparent ;
+    background:transparent linear-gradient(45deg, #818cf8, #a855f7);
     color: #667eea;
     border: 2px ;
     padding: 8px 20px;
@@ -129,7 +129,7 @@ body.dark-mode .profile .button {
 }
 
 .profile .button:hover {
-    background: #667eea;
+    background: linear-gradient(45deg, #818cf8, #a855f7);
     color: white;
 }
 
