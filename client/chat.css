@@ -113,7 +113,7 @@ body.dark-mode .dark-mode-toggle:hover {
 }
 
 .profile .button {
-    background: transparent;
+   /* background: transparent;*/
     color: #667eea;
     border: 2px solid #667eea;
     padding: 8px 20px;
