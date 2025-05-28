@@ -126,6 +126,7 @@ body.dark-mode .dark-mode-toggle:hover {
 body.dark-mode .profile .button {
     color: #000000;
     border-color: #818cf8;
+    background-color: white;
 }
 
 .profile .button:hover {
