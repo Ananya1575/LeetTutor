@@ -113,9 +113,9 @@ body.dark-mode .dark-mode-toggle:hover {
 }
 
 .profile .button {
-    background: white ;
+    background:transparent ;
     color: #667eea;
-    border: 2px solid #667eea;
+    border: 2px ;
     padding: 8px 20px;
     border-radius: 25px;
     font-weight: 500;
@@ -134,7 +134,7 @@ body.dark-mode .profile .button {
 }
 
 body.dark-mode .profile .button:hover {
-    background: #fcfbfb;
+    background: #667eea;
 }
 
 .dropdown {
